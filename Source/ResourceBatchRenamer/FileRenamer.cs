@@ -15,7 +15,7 @@ namespace ResourceBatchRenamer
             GuardNotNull(file, "file");
             GuardNotNull(fileNameConverter, "fileNameConverter");
             GuardNotNullOrEmpty(files);
-            
+
             this.file = file;
             this.fileNameConverter = fileNameConverter;
             this.files = files;

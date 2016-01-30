@@ -14,6 +14,6 @@ namespace ResourceBatchRenamer
         public void Move(string sourceFileName, string destFileName)
         {
             File.Move(sourceFileName, destFileName);
-        } 
+        }
     }
 }

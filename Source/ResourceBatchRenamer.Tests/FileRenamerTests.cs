@@ -27,7 +27,7 @@ namespace ResourceBatchRenamer.Tests
             // ReSharper disable once ObjectCreationAsStatement
             Assert.Catch<ArgumentException>(() => new FileRenamer(null, this.converter, testFileNames));
         }
-        
+
         [Test]
         public void ConstructorShouldGuardConverter()
         {

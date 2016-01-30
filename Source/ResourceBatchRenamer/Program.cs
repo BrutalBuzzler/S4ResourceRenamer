@@ -15,7 +15,7 @@ namespace ResourceBatchRenamer
 			}
 			catch (Exception e)
 			{
-				
+
 				WriteToErrorLog(e);
 			}
 		}
