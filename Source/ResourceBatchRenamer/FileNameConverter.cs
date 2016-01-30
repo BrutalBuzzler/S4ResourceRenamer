@@ -4,7 +4,13 @@ using System.IO;
 
 namespace ResourceBatchRenamer
 {
-	public class FileNameConverter
+    using System.Text.RegularExpressions;
+
+    /// <summary>
+    /// Utility class to convert file names or paths in the TS4 resource name
+    /// convention to the s4pe convention.
+    /// </summary>
+    public class FileNameConverter
 	{
 		private static readonly IDictionary<string, string> resourceMap = new Dictionary<string, string>
 		{
@@ -18,10 +24,31 @@ namespace ResourceBatchRenamer
 			{ "rmi", "0x00de5ac5" }
 		};
 
+        /// <summary>
+        /// Returns a value indicating whether the given <paramref name="path"/> is
+        /// a valid TS4 resource file name.
+        /// </summary>
+	    public static bool IsValidFileName(string path)
+	    {
+	        if (string.IsNullOrWhiteSpace(path))
+	        {
+	            return false;
+	        }
+
+	        const string matchPattern = "0x[0-9a-f]{8}!0x[0-9a-f]{16}\\.(trayitem|blueprint|bpi|householdbinary|hhi|sgi|room|rmi)";
+
+	        bool isValid = Regex.IsMatch(path, matchPattern, RegexOptions.IgnoreCase);
+
+	        return isValid;
+	    }
+
+        /// <summary>
+        /// Converts the specified TS4 file name or path to its s4pe equivalent.
+        /// </summary>
 		public virtual string ConvertToPackageManagerConvention(string ts4Path)
 		{
-			string path = Path.GetDirectoryName(ts4Path);
-			string ts4Name = Path.GetFileName(ts4Path);
+			string path = Path.GetDirectoryName(ts4Path) ?? string.Empty;
+			string ts4Name = Path.GetFileName(ts4Path) ?? string.Empty;
 			var parts = ts4Name.Split('!', '.');
 
 			GuardInputIsValid(parts);
