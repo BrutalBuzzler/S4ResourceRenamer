@@ -1,8 +1,6 @@
 # S4ResourceRenamer
 A little command line tool to batch rename TS4 resources to the S4PE format.
 
----
-
 ## Tech
 S4ResourceRenamer is a .NET 4.5 console application.
 The solution is created in Visual Studio 2012.
@@ -12,10 +10,9 @@ The solution is created in Visual Studio 2012.
 
 ## Functionality
 The tool renames TS4 resources in the format  
-> `{group}!{instance}.{type}`
-
-to the S4PE format
-> `S4_{type}_{group}_{instance}`.
+&nbsp;&nbsp;&nbsp;&nbsp; `{group}!{instance}.{type}`  
+to the S4PE format  
+&nbsp;&nbsp;&nbsp;&nbsp; `S4_{type}_{group}_{instance}`.
 
 So for example  
 &nbsp;&nbsp;&nbsp;&nbsp;`0x00001234!0x07a00296298c0116.blueprint`  
