@@ -1,8 +1,8 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace ResourceBatchRenamer.Tests
+﻿namespace ResourceBatchRenamer.Tests
 {
+    using System;
+    using NUnit.Framework;
+
     [TestFixture]
     public class FileNameConverterTests
     {
@@ -12,6 +12,25 @@ namespace ResourceBatchRenamer.Tests
         public void Setup()
         {
             this.renamer = new FileNameConverter();
+        }
+
+        [TestCase(false, @"")]
+        [TestCase(false, null)]
+        [TestCase(true, @"0x00000000!0x07a00296298d1234.trayitem")]
+        [TestCase(true, @"0x00001234!0x07a00296298c0116.blueprint")]
+        [TestCase(true, @"0x00001234!0x07a00296298c0116.bpi")]
+        [TestCase(true, @"0x00001234!0x07a00296298c0116.householdbinary")]
+        [TestCase(true, @"0x00001234!0x07a00296298c0116.hhi")]
+        [TestCase(true, @"0x00001234!0x07a00296298c0116.sgi")]
+        [TestCase(true, @"0x00001234!0x07a00296298c0116.room")]
+        [TestCase(true, @"0x0000A234!0x07a00296298c0116.rmi")]
+        [TestCase(false, @"0x0000A234-0x07a00296298c0116.rmi")]
+        [TestCase(false, @"0x0000z234!0x07a00296298c0116.rmi")]
+        public void IsValidFileNameShouldWorkProperly(bool isValid, string fileName)
+        {
+            bool actual = FileNameConverter.IsValidFileName(fileName);
+
+            Assert.AreEqual(isValid, actual);
         }
 
         [Test]
